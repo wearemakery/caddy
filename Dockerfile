@@ -1,15 +1,19 @@
-FROM alpine:3.3
+FROM alpine:3.4
 
 MAINTAINER Gyula Voros <gyulavoros87@gmail.com>
 
-RUN apk add --update curl tar \
+ARG features=
+
+RUN apk add --update ca-certificates
+
+RUN apk add --no-cache curl tar \
   && curl --silent --show-error --fail --location \
-    --header "Accept: application/tar+gzip, application/x-gzip, application/octet-stream" -o \
-    - "https://caddyserver.com/download/build?os=linux&arch=amd64&features=git" \
+    --header "Accept: application/tar+gzip, application/x-gzip, application/octet-stream" -o - \
+    "https://caddyserver.com/download/build?os=linux&arch=amd64&features=${features}" \
     | tar --no-same-owner -C /usr/bin/ -xz caddy \
   && chmod 0755 /usr/bin/caddy \
-  && apk del curl tar \
-  && rm -rf /var/cache/apk/*
+  && /usr/bin/caddy -version \
+  && apk del curl tar
 
 EXPOSE 80 443
 
