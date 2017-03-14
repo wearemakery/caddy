@@ -1,6 +1,6 @@
-FROM alpine:3.4
+FROM alpine:3.5
 
-MAINTAINER Gyula Voros <gyulavoros87@gmail.com>
+MAINTAINER Gyula Voros <gyula@makery.co>
 
 ARG features=
 
