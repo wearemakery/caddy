@@ -1,8 +1,8 @@
-FROM alpine:3.6
+FROM alpine:3.7
 
 MAINTAINER Gyula Voros <gyula@makery.co>
 
-ARG version=v0.10.10
+ARG version=v0.10.11
 
 RUN apk add --update ca-certificates
 
